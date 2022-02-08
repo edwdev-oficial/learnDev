@@ -1,0 +1,26 @@
+{
+  "name": "api_learndev",
+  "version": "1.0.0",
+  "description": "Api da aplicação learnDev",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EdOliveiraJ/learnDev.git"
+  },
+  "keywords": [
+    "HTML",
+    "CSS3",
+    "Javascript",
+    "Node.js",
+    "Mongodb"
+  ],
+  "author": "Eduardo Oliveira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EdOliveiraJ/learnDev/issues"
+  },
+  "homepage": "https://github.com/EdOliveiraJ/learnDev#readme"
+}
