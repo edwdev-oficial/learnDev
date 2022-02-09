@@ -6,8 +6,11 @@ const TopicoSchema = new mongoose.Schema({
         required: true
     },
     tema: {
-        type: new mongoose.Types.ObjectId(),
-        referece: 'Tema'
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Tema'
+    },
+    order: {
+        type: Number
     }
 });
 

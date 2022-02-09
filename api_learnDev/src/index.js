@@ -14,6 +14,7 @@ app.get('/', (req, res) => {
 });
 
 require('./controllers/temaController')(app);
+require('./controllers/topicoController')(app);
 
 
 app.listen(port, () => {
