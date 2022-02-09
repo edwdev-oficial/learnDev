@@ -1,0 +1,144 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+  --cor-bg-principal: #464D45;
+  --cor2: #696E68;
+  --cor3: #E0E0E0;
+  --cor4: #85948F;
+  --cor5: #C6CFCC;
+}
+
+body {
+  background-color: white;
+}
+
+header {
+  position: fixed;
+  /* background-color: rgb(45, 40, 40); */
+  background-color: var(--cor-bg-principal);
+  color: whitesmoke;
+  width: 100vw;
+  padding: 15px;
+  margin-left: calc(17vw);
+  box-shadow: 5px 5px 5px black;
+  border-radius: 0 22px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 17vw auto;
+  grid-template-rows: 67.6px auto;
+  /* grid-gap: 5px; */
+}
+
+nav {
+  position: fixed;
+  min-width: 17vw;
+  height: 100vh;
+  background: whitesmoke;
+}
+
+main {
+  grid-column-start: 2;
+  grid-row-start: 2;
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sidebar {
+  background-color: var(--cor2);
+  height: 100%;
+  padding: 27px;
+  /* margin: 17px; */
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.sidebar > .item-menu {
+  margin-bottom: 5px;
+  padding: 10px;
+  padding-left: 20px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.item-menu:nth-of-type(odd) {
+  background-color: var(--cor4);
+  color: whitesmoke;
+}
+
+.item-menu:nth-of-type(even){
+  background-color: var(--cor3);
+  color: var(--cor-bg-principal);
+}
+
+
+.item-menu:hover {
+  background-color: green;
+  color: whitesmoke;
+}
+
+.topico {
+  background-color: whitesmoke;
+  width: 100%;
+  height: 717px;
+  margin-top: 5px;
+  border-radius: 22px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 356px auto;
+  grid-gap: 2px;
+}
+
+.item {
+  background-color: var(--cor2);
+  padding: 25px;
+}
+
+.s-e h2 {
+  color: var(--cor3);
+  font-size: 2.2em;
+  font-weight: bold;
+}
+
+.s-e p {
+  margin-top: 15px;
+  color: var(--cor5);
+}
+
+.b-t {
+  grid-area: 2 / 1 / span 1/ span 2;
+  padding: 0;
+}
+
+.coments {
+  color: var(--cor4);
+  margin: 4px 0;
+}
+
+.s-d {
+  /* background-color: tomato; */
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+/*======================================================================================================
+          MODAL
+========================================================================================================*/
+
+.container-modal {
+  width: 70%;
+  height: 70%;
+  background-color: tomato;
+  position: fixed;
+  z-index: -1;
+}
