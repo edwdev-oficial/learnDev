@@ -13,6 +13,8 @@ app.get('/', (req, res) => {
     res.send({ mensagem: 'app rodando ok!' });
 });
 
+require('./controllers/temaController')(app);
+
 
 app.listen(port, () => {
     console.log(`app loading in url http://localhost:${port}`)

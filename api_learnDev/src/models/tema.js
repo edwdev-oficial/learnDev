@@ -1,12 +1,12 @@
 const mongoose = require('../database')
 
-const temaSchema = new mongoose.Schema({
+const TemaSchema = new mongoose.Schema({
     nome: {
         type: String,
         required: true
     }
 });
 
-const Tema = mongoose.Schema('Tema', temaSchema);
+const Tema = mongoose.model('Tema', TemaSchema);
 
 module.exports = Tema;
