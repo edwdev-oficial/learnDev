@@ -3,9 +3,12 @@ const Topico = require('../models/topico');
 const mongoose = require('mongoose');
 const router = express.Router();
 
+// create
 router.post('/', async(req, res) => {
 
     try {
+
+        req.body.order = await Topico.count({ tema: req.body.tema}) + 1;
 
         const topico = await Topico.create(req.body);
 
@@ -17,6 +20,7 @@ router.post('/', async(req, res) => {
 
 });
 
+// read
 router.get('/', async(req, res) => {
 
     try {
@@ -31,6 +35,7 @@ router.get('/', async(req, res) => {
 
 });
 
+// find
 router.post('/find', async(req, res) => {
 
     try {
@@ -49,6 +54,7 @@ router.post('/find', async(req, res) => {
 
 });
 
+// update
 router.put('/', async(req, res) => {
 
     try {
@@ -58,32 +64,40 @@ router.put('/', async(req, res) => {
         // pega todos que tiverem order igual ou maior que req.body.newOrder e menor que req.body.order e acrecenta 1
 
         if (req.body.newOrder < req.body.order) {
-
+            
             topico = await Topico.updateMany(
                 {
-                    tema: req.body.tema,
                     $and: [
                         {
-                            order: { $gte: req.body.newOrder }, 
-                            order: { $lt: req.body.order }
-                        }
-                    ]
+                          tema: req.body.tema
+                        },
+                        {
+                          order: { $gte: req.body.newOrder }
+                        },
+                        {
+                          order: { $lt: req.body.order }
+                        },
+                      ]
                 },
                 {
                     $inc: { order: 1 }
                 }
-            );
-
-        };
-
-        if (req.body.newOrder > req.body.order) {
-
-            topico = await Topico.updateMany(
+                );
+                
+            };
+            
+            if (req.body.newOrder > req.body.order) {
+                
+                topico = await Topico.updateMany(
                 {
-                    tema: req.body.tema,
                     $and: [
                         {
-                            order: { $gt: req.body.order }, 
+                            tema: req.body.tema,
+                        },
+                        {
+                            order: { $gt: req.body.order }
+                        },
+                        {
                             order: { $lte: req.body.newOrder }
                         }
                     ]
@@ -115,9 +129,16 @@ router.put('/', async(req, res) => {
 
 });
 
+// delete
 router.delete('/', async(req, res) => {
 
     try {
+
+        const topico = await Topico.findByIdAndDelete(
+            req.body._id
+        );
+
+        return res.status(200).send({ topico });
 
     }catch(error) {
         return res.status(400).send({ error: '' })
