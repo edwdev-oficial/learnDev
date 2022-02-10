@@ -16,6 +16,7 @@ app.get('/', (req, res) => {
 require('./controllers/temaController')(app);
 require('./controllers/topicoController')(app);
 require('./controllers/subtopicoController')(app);
+require('./controllers/postController')(app);
 
 
 app.listen(port, () => {
