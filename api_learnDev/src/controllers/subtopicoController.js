@@ -7,14 +7,14 @@ router.post('/', async(req, res) => {
 
     try {
 
-        req.body.order = await Subtopico.count({ topico: req.body.topico }) + 1;
+        // req.body.order = await Subtopico.count({ topico: req.body.topico }) + 1;
 
         const subtopico = await Subtopico.create(req.body);
 
         return res.status(200).send({ subtopico });
 
     }catch(error) {
-        return res.status(400).send({ error: '' });
+        return res.status(400).send({ error: 'Create failed' });
     };
 
 });
