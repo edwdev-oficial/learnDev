@@ -62,7 +62,6 @@ router.put('/', async(req, res) => {
         let topico;
 
         // pega todos que tiverem order igual ou maior que req.body.newOrder e menor que req.body.order e acrecenta 1
-
         if (req.body.newOrder < req.body.order) {
             
             topico = await Topico.updateMany(
