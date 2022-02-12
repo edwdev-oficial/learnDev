@@ -19,7 +19,6 @@ body {
 
 header {
   position: fixed;
-  /* background-color: rgb(45, 40, 40); */
   background-color: var(--cor-bg-principal);
   color: whitesmoke;
   width: 100vw;
@@ -33,7 +32,15 @@ header {
   display: grid;
   grid-template-columns: 17vw auto;
   grid-template-rows: 67.6px auto;
-  /* grid-gap: 5px; */
+}
+
+main {
+  grid-column-start: 2;
+  grid-row-start: 2;
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
 }
 
 nav {
@@ -43,16 +50,6 @@ nav {
   background: whitesmoke;
 }
 
-main {
-  grid-column-start: 2;
-  grid-row-start: 2;
-  min-height: 100vh;
-  overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 .sidebar {
   background-color: var(--cor2);
   height: 100%;
@@ -60,9 +57,24 @@ main {
   /* margin: 17px; */
   overflow: hidden;
   overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
 }
 
-.sidebar > .item-menu {
+.li-tema {
+  min-width: 155px;
+  margin-bottom: 5px;
+  padding: 10px;
+  padding-left: 20px;
+  border-radius: 15px;  
+  cursor: pointer;
+  transition: 0.4s;
+  list-style: none;
+}
+
+.li-tema {
+  min-width: 155px;
   margin-bottom: 5px;
   padding: 10px;
   padding-left: 20px;
@@ -71,21 +83,35 @@ main {
   transition: 0.4s;
 }
 
-.item-menu:nth-of-type(odd) {
+.escuro {
   background-color: var(--cor4);
   color: whitesmoke;
 }
 
-.item-menu:nth-of-type(even){
+.claro {
   background-color: var(--cor3);
   color: var(--cor-bg-principal);
 }
 
 
-.item-menu:hover {
+.li-tema:hover {
   background-color: green;
   color: whitesmoke;
 }
+
+.li-topico {
+  width: 130px;
+  margin-bottom: 5px;
+  padding: 10px;
+  padding-left: 20px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.4s;
+  background-color: tomato;
+  list-style: none;
+  /* display: none; */
+}
+
 
 .topico {
   background-color: whitesmoke;
@@ -136,9 +162,54 @@ main {
 ========================================================================================================*/
 
 .container-modal {
-  width: 70%;
-  height: 70%;
-  background-color: tomato;
   position: fixed;
+  width: 70%;
+  max-height: 950px;
+  background-color: whitesmoke;
+  padding: 10px;
   z-index: -1;
+  border-radius: 5px;
+}
+
+.topicos-modal {
+  height: 100%;
+  width: 100%;
+  border: 1px solid var(--cor2);
+}
+
+.topico-modal {
+  background-color: whitesmoke;
+  width: 100%;
+  height: 100%;
+  margin-top: 5px;
+  border-radius: 22px;
+  padding: 20px;
+  display: grid;
+  /* grid-template-columns: 50% 50%; */
+  grid-template-rows: 250px auto;
+  grid-gap: 2px;
+}
+
+.item-modal {
+  /* height: 300px !important; */
+  background-color: var(--cor2);
+  padding: 25px;
+}
+
+.s-e-modal h2 {
+  color: var(--cor3);
+  font-size: 2.2em;
+  font-weight: bold;
+}
+
+.s-e-modal p {
+  margin-top: 15px;
+  color: var(--cor5);
+}
+
+.modal-subtopico {
+  /* height: 300px; */
+  /* background-color: tomato; */
+  overflow: hidden;
+  overflow-y: scroll;
 }
