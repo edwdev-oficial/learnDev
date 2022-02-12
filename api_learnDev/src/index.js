@@ -7,7 +7,7 @@ const port = 8081;
 
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
-
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.send({ mensagem: 'app rodando ok!' });
