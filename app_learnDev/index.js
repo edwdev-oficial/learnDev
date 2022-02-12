@@ -30,66 +30,66 @@ import { TopicoController } from './controller/topicoController.js';
     
 // }
 
-const sideBar = document.querySelector('.sidebar');
-const ul = document.createElement('ul');
-const li = document.createElement('li');
-let ulTopico;
-let liTema;
-let liTopico;
-let cor;
+// const sideBar = document.querySelector('.sidebar');
+// const ul = document.createElement('ul');
+// const li = document.createElement('li');
+// let ulTopico;
+// let liTema;
+// let liTopico;
+// let cor;
 
-ulTopico = ul.cloneNode(true)
-ulTopico.classList.add('ul-tema')
+// ulTopico = ul.cloneNode(true)
+// ulTopico.classList.add('ul-tema')
 
-for (let indexTema = 1; indexTema <= 10; indexTema++) {
+// for (let indexTema = 1; indexTema <= 15; indexTema++) {
     
-    if (indexTema % 2 == 0) {
-        cor = 'escuro'
-    }else{
-        cor = 'claro'
-    }
+//     if (indexTema % 2 == 0) {
+//         cor = 'escuro'
+//     }else{
+//         cor = 'claro'
+//     }
 
-    liTema = li.cloneNode(true)
-    liTema.classList.add(`li-tema`, `tema${indexTema}`, cor)
-    liTema.innerHTML = `Tema ${indexTema}`
-    
-    
-    ulTopico.appendChild(liTema)
-    
-    // liTopico = li.cloneNode(true)
-    // liTopico.classList.add('li-topico')
-    // liTopico.innerHTML = `Topico 1`
-    // ulTopico.appendChild(liTopico)
-
-    // for (indexLi = 1; indexLi <= 2; indexLi++) {
-    //     liTema = li.cloneNode(true)
-    //     liTema.classList.add('li-tema')
-    //     liTema.innerHTML = `Topico${indexTema}`
-    //     ulTopico.appendChild(liTema)
-    
-    // }
-    
-    sideBar.appendChild(ulTopico)
-
-    liTema.addEventListener('click', (target) => {
-        mostrarSubTopicos(target.target.classList[1].toString())
-    })
+//     liTema = li.cloneNode(true)
+//     liTema.classList.add(`li-tema`, `tema${indexTema}`, cor)
+//     liTema.innerHTML = `Tema ${indexTema}`
     
     
-}
+//     ulTopico.appendChild(liTema)
+    
+//     // liTopico = li.cloneNode(true)
+//     // liTopico.classList.add('li-topico')
+//     // liTopico.innerHTML = `Topico 1`
+//     // ulTopico.appendChild(liTopico)
 
-function mostrarSubTopicos(classe) {
-    let tema = document.querySelector(`.${classe}`)
+//     // for (indexLi = 1; indexLi <= 2; indexLi++) {
+//     //     liTema = li.cloneNode(true)
+//     //     liTema.classList.add('li-tema')
+//     //     liTema.innerHTML = `Topico${indexTema}`
+//     //     ulTopico.appendChild(liTema)
+    
+//     // }
+    
+//     sideBar.appendChild(ulTopico)
 
-    liTopico = li.cloneNode(true)
-    liTopico.classList.add('li-topico')
-    liTopico.innerHTML = `Topico 1`
-    firstChield = tema.firstChild
-    // console.log(firstChield)
-    tema.append(firstChield)
+//     liTema.addEventListener('click', (target) => {
+//         mostrarSubTopicos(target.target.classList[1].toString())
+//     })
+    
+    
+// }
+
+// function mostrarSubTopicos(classe) {
+//     let tema = document.querySelector(`.${classe}`)
+
+//     liTopico = li.cloneNode(true)
+//     liTopico.classList.add('li-topico')
+//     liTopico.innerHTML = `Topico 1`
+//     // firstChield = tema.firstChild
+//     // console.log(firstChield)
+//     tema.append(firstChield)
 
 
-    console.log(tema)
+//     console.log(tema)
 
-}
+// }
 

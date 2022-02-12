@@ -67,20 +67,17 @@ nav {
   margin-bottom: 5px;
   padding: 10px;
   padding-left: 20px;
-  border-radius: 15px;  
-  cursor: pointer;
-  transition: 0.4s;
-  list-style: none;
-}
-
-.li-tema {
-  min-width: 155px;
-  margin-bottom: 5px;
-  padding: 10px;
-  padding-left: 20px;
   border-radius: 15px;
   cursor: pointer;
   transition: 0.4s;
+  list-style: none;
+  transition: all 0.2s ease-in-out;
+
+}
+
+.li-tema:hover {
+  top: -6px;
+  box-shadow: 2px 2px 2px rgb(0, 0, 0);
 }
 
 .escuro {
@@ -94,10 +91,10 @@ nav {
 }
 
 
-.li-tema:hover {
+/* .li-tema:hover {
   background-color: green;
   color: whitesmoke;
-}
+} */
 
 .li-topico {
   width: 130px;
@@ -109,7 +106,6 @@ nav {
   transition: 0.4s;
   background-color: tomato;
   list-style: none;
-  /* display: none; */
 }
 
 
