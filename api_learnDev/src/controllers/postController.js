@@ -8,9 +8,11 @@ router.post('/', async(req, res) => {
 
     try {
 
-        console.log(req.body)
-
-        req.body.order = await Post.count({}) + 1;
+        req.body.order = await Post.count(
+            {
+                subtopico: req.body.subtopico
+            }
+        ) + 1;
 
         const post = await Post.create(req.body);
 
@@ -27,7 +29,7 @@ router.get('/', async(req, res) => {
 
     try {
 
-        const post = await Post.find({});
+        const post = await Post.find({}).sort({ order: 1 });
 
         return res.status(200).send({ post });
 
@@ -46,12 +48,12 @@ router.put('/', async(req, res) => {
 
         //se subir
         if(req.body.order > req.body.newOrder) {
-            console.log('subir')
+
             post = await Post.updateMany(
                 {
                     $and: [
                         {
-                            topico: req.body.topico
+                            subtopico: req.body.subtopico
                         },
                         {
                             order: { $gte: req.body.newOrder }                        
@@ -75,7 +77,7 @@ router.put('/', async(req, res) => {
                 {
                     $and: [
                         {
-                            topico: req.body.topico
+                            subtopico: req.body.subtopico
                         },
                         {
                             order: { $gt: req.body.order }
@@ -95,7 +97,7 @@ router.put('/', async(req, res) => {
         post = await Post.findByIdAndUpdate(
             req.body._id,
             {
-                titte: req.body.titte,
+                tittle: req.body.tittle,
                 comment: req.body.comment,
                 order: req.body.newOrder
             },
@@ -129,13 +131,15 @@ router.delete('/', async(req, res) => {
 
 });
 
+//find
 router.post('/find', async(req, res) => {
-
     try {
+        console.log('Entrou na rota post/find')
+        console.log(req.body)
 
         const post = await Post.find(
             {
-                topico: req.body.topico
+                subtopico: req.body.subtopico
             }
         ).sort({ order: 1 });
 

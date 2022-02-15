@@ -96,7 +96,9 @@ router.put('/', async(req, res) => {
             req.body._id,
             {
                 nome: req.body.nome,
-                order: req.body.newOrder
+                order: req.body.newOrder,
+                comment: req.body.comment,
+                codepen: req.body.codepen
             },
             (options = {
                 returnDocument: "after",
