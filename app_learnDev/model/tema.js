@@ -10,6 +10,6 @@ export class Tema {
 
         return promise.json();
 
-    }
+    };
 
-}
+};

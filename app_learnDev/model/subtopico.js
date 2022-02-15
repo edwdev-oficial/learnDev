@@ -2,17 +2,17 @@ import { Config } from "../config/config.js";
 
 const url = Config.Url();
 
-export class Topico {
+export class Subtopico {
 
-    static async getTopicos(data) {
+    static async getTopicos(topico) {
 
-        const promise = await fetch(`${url}/topico/find`, {
+        const response = await fetch(`${url}/subtopico/find`, {
             method: 'POST',
-            body: JSON.stringify(data),
+            body: JSON.stringify(topico),
             headers: { 'Content-Type': 'application/json; charset=UTF-8' }
         });
 
-        return promise.json();
+        return response.json();
 
     };
 

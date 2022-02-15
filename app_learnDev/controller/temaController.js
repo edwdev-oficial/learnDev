@@ -7,9 +7,9 @@ export class TemaController {
 
         const data = await Tema.getTemas();
 
-        metodo.printTemas(data.tema)
+        metodo.printTemas(data.tema);
 
-    }
+    };
 
     printTemas(temas) {
 
@@ -40,13 +40,15 @@ export class TemaController {
 
             liTema.addEventListener('click', () => {
 
-                // const liTopicos = document.querySelectorAll('.li-topico');
+                const header = document.querySelector('h1')
+                header.textContent = `LearnDev - ${ulTema.childNodes[0].textContent}`
 
                 if (ulTema.childNodes.length == 1) {
                     TopicoController.getTopicos(element._id);
                 }else{
+                    header.textContent = 'LearnDev';
                     TopicoController.removeTopicos();
-                }
+                };
 
             });
 
