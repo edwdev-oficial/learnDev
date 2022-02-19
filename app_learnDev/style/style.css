@@ -269,7 +269,8 @@ tr {
   padding: 25px;
 }
 
-.btn-modal-edit{
+.btn-modal-edit, 
+.btn-modal-create {
   width: 100px;
   padding: 3px;
   border: none;

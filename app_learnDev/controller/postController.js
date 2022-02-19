@@ -3,7 +3,7 @@ import { ModalController } from "./modalController.js";
 
 export class PostController {
 
-    static async getPosts(subtopico, slughash) {
+    static async getPosts(subtopico, slughash, topico) {
 
         const _data = {
             subtopico: subtopico

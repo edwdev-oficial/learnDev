@@ -12,11 +12,11 @@ export class SubtopicoController {
 
         const data = await Subtopico.getTopicos(_data)
         
-        metodo.printSubTopico(data.subtopico);
+        metodo.printSubTopico(data.subtopico, topico);
 
     };
 
-    printSubTopico(subtopico) {
+    printSubTopico(subtopico, topico) {
         
         const subtopicos = document.querySelector('.subtopicos');
 
@@ -35,6 +35,7 @@ export class SubtopicoController {
             const itemBt = document.createElement('div');
             itemBt.classList.add('item', 'b-t');
             const subTopicoNome = document.createElement('h2');
+            subTopicoNome.classList.add(`topico-${topico}`);
             subTopicoNome.textContent = `${element.order}. ${element.nome}`;
             const comment = document.createElement('p');
             comment.textContent = element.comment;
@@ -44,11 +45,10 @@ export class SubtopicoController {
             subtopico.appendChild(itemSe);
             subtopico.appendChild(itemSd);
             subtopico.appendChild(itemBt);
-            // console.log(subtopico)
             subtopicos.appendChild(subtopico);
 
-            subTopicoNome.addEventListener('click', (target) => {
-                metodo.abrirModal()
+            subTopicoNome.addEventListener('click', (event) => {
+                metodo.abrirModal(event.target)
             });
 
             PostController.getPosts(element._id, element.codepen);
@@ -61,9 +61,10 @@ export class SubtopicoController {
         
     };
     
-    abrirModal() {
-        
-        let modal = document.querySelector('.container-modal')
+    abrirModal(target) {
+        let idTopico = target.classList[0].replace('topico-', '');
+        let modal = document.querySelector('.container-modal');
+        modal.setAttribute('id', idTopico);
         modal.style.zIndex = '2'
 
     }

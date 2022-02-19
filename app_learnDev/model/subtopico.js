@@ -16,4 +16,14 @@ export class Subtopico {
 
     };
 
+    static async createSubtopico(_data) {
+        const response = await fetch(`${url}/subtopico`, {
+            method: 'POST',
+            body: JSON.stringify(_data),
+            headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+        });
+
+        return response.json();
+    }
+
 };

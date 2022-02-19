@@ -152,83 +152,85 @@ export class ModalController {
 
     }
 
-    editPosts() {
+    // editPosts() {
         
-        const modalPosts = document.querySelector('.modal-posts');
+    //     const modalPosts = document.querySelector('.modal-posts');
 
-        modalPosts.addEventListener('click', (event) => {
+    //     modalPosts.addEventListener('click', (event) => {
             
-            if(event.target.classList[0] == 'pPost') {
+    //         if(event.target.classList[0] == 'pPost') {
 
-                if(modalEditData.children.length > 0){
-                    for(let i = modalEditData.children.length -1 ; i>=0; i--) {
-                        modalEditData.children[i].remove()
-                    };
-                };
+    //             if(modalEditData.children.length > 0){
+    //                 for(let i = modalEditData.children.length -1 ; i>=0; i--) {
+    //                     modalEditData.children[i].remove()
+    //                 };
+    //             };
                
-                const postSelected = event.target;
-                console.log(postSelected.classList[1])
+    //             const postSelected = event.target;
+    //             console.log(postSelected.classList[1])
 
-                const tittlePost = document.createElement('input');
-                tittlePost.classList.add('post', postSelected.classList[1]);
-                tittlePost.value = postSelected.textContent;
+    //             const tittlePost = document.createElement('input');
+    //             tittlePost.classList.add('post', postSelected.classList[1]);
+    //             tittlePost.value = postSelected.textContent;
                 
-                const commentPost = document.createElement('input');
-                commentPost.classList.add('comment');
-                commentPost.value = postSelected.nextElementSibling.textContent.replace('// ', '');
+    //             const commentPost = document.createElement('input');
+    //             commentPost.classList.add('comment');
+    //             commentPost.value = postSelected.nextElementSibling.textContent.replace('// ', '');
                 
-                modalEditData.append(tittlePost);
-                modalEditData.append(commentPost);
-                modalEdit.style.zIndex = '10';
-            };
+    //             modalEditData.append(tittlePost);
+    //             modalEditData.append(commentPost);
+    //             modalEdit.style.zIndex = '10';
+    //         };
 
-        });
+    //     });
 
-    };
+    // };
 
-    getPost() {
-        const btnSalvarPost = modalEdit.querySelector('.btn-modal-edit.salvar')
-        modalEdit.addEventListener('click', (event) => {
-            if(event.target.textContent == 'Salvar') {
-                console.log(event.target)
-                const post = event
-                .target
-                .parentNode
-                .parentNode
-                .children[0]
-                .children[0];
-                metodo.savePost(post);
-            }
-        });
-    };
+    // getPost() {
+    //     const btnSalvarPost = modalEdit.querySelector('.btn-modal-edit.salvar')
+    //     modalEdit.addEventListener('click', (event) => {
+    //         // console.log(event.target.classList.value)
+    //         // console.log( event.target.classList.indexOf('btn-modal-edit') )
+    //         if(event.target.classList == 'btn-modal-edit salvar') {
+    //             console.log('Editando')
+    //             const post = event
+    //             .target
+    //             .parentNode
+    //             .parentNode
+    //             .children[0]
+    //             .children[0];
+    //             // metodo.savePost(post);
+    //         }
+    //     });
+    // };
 
-    async savePost(post) {
-        const idPost = post.classList[1];
-        const tittlePost = post.value;
-        let commentPost;
-        if(post.nextElementSibling.value !== '') {
-            commentPost = `// ${post.nextElementSibling.value}`;  
-        }else{
-            commentPost = '';
-        };
+    // async savePost(post) {
+    //     const idPost = post.classList[1];
+    //     const tittlePost = post.value;
+    //     let commentPost;
+    //     if(post.nextElementSibling.value !== '') {
+    //         commentPost = `// ${post.nextElementSibling.value}`;  
+    //     }else{
+    //         commentPost = '';
+    //     };
 
-        const data = {
-            _id: idPost,
-            tittle: tittlePost,
-            comment: commentPost
-        };
+    //     const data = {
+    //         _id: idPost,
+    //         tittle: tittlePost,
+    //         comment: commentPost
+    //     };
 
-        console.log(data)
+    //     console.log(data)
       
-        const response = await Post.editPost(data);
+    //     const response = await Post.editPost(data);
 
-        console.log(response);
+    //     console.log(response);
 
-    };
+    // };
 
 };
 
 const metodo = new ModalController();
 metodo.alteraPosictionSubTopic();
-metodo.editPosts();
-metodo.getPost();
+// metodo.editPosts();
+// metodo.getPost();
