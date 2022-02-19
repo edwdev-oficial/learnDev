@@ -68,7 +68,6 @@ export class ModalController {
         const _data = {
             subtopico: this.getAttribute('nome')
         }
-        // console.log(_data)
         const posts = await Post.getPosts(_data);
         const subTopico = this
         metodo.printPosts(posts.post, subTopico);
@@ -153,18 +152,6 @@ export class ModalController {
 
     }
 
-    // static printPostsModal(subtopico, posts) {
-    //     let h2Subtopico = document.querySelector('.h2-subtopico')
-    //     // console.log(h2Subtopico)
-    //     posts.map((post) => {
-    //         // if(post.subtopico == subtopico)
-    //         // console.log(post)
-    //     })
-    //     // console.log(subtopico);
-    //     // console.log(posts);
-
-    // }
-
     editPosts() {
         
         const modalPosts = document.querySelector('.modal-posts');
@@ -211,15 +198,6 @@ export class ModalController {
                 .children[0]
                 .children[0];
                 metodo.savePost(post);
-                // console.log(event
-                //     .target
-                //     .parentNode
-                //     .parentNode
-                //     .children[0]
-                //     .children[0]
-                //     .classList[1]
-                //     );
-
             }
         });
     };
