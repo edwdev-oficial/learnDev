@@ -39,7 +39,7 @@ main {
   grid-row-start: 2;
   min-height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: end;
 }
 
 nav {
@@ -100,6 +100,11 @@ nav {
   transition: 0.4s;
   list-style: none;
   font-size: 10px;
+}
+
+.subtopicos {
+  width: 100%;
+  background-color: whitesmoke;
 }
 
 .subtopico {
@@ -195,6 +200,10 @@ iframe {
   overflow-y: scroll;
 }
 
+.btn-edit-subtopico {
+  margin-left: 15px;
+}
+
 /*======================================================================================================
           MODAL - TABLE
 ========================================================================================================*/
@@ -224,4 +233,52 @@ td {
 tr {
   font-size: .9em;
   cursor: pointer;
+}
+
+/*======================================================================================================
+          MODAL - EDITAR
+========================================================================================================*/
+
+.container-modal-editar{
+  display: flex;
+  flex-direction: column;
+  /* justify-content: end; */
+  width: 70vw;
+  height: 88vh;
+  background-color: tomato;
+  z-index: -1;
+  position: fixed;
+}
+
+.modal-edit-data {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  padding: 25px;
+}
+
+.modal-edit-data .post,
+.modal-edit-data .comment {
+  padding: 7px;
+  margin: 6px;
+  border-radius: 5px;
+}
+
+.btns-modal-edit {
+  display: flex;
+  justify-content: end;
+  padding: 25px;
+}
+
+.btn-modal-edit{
+  width: 100px;
+  padding: 3px;
+  border: none;
+  border-radius: 3px;
+  border-right: 1px solid gray;
+  border-bottom: 1px solid gray;
+}
+
+.btn-modal-edit.cancelar{
+  margin-right: 6px;
+  margin-left: 10px;
 }

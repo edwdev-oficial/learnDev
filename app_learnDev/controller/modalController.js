@@ -3,6 +3,8 @@ import { Post } from "../model/post.js";
 const subtopicos = document.querySelectorAll('tr');
 const tableSubtopicos = document.querySelector('.table-subtopicos');
 const seModal = document.querySelector('.s-e-modal');
+const modalEdit = document.querySelector('.container-modal-editar');
+const modalEditData = document.querySelector('.modal-edit-data');
 let tr,
     tbody, 
     tdSubtopico,
@@ -14,14 +16,17 @@ export class ModalController {
     alteraPosictionSubTopic() {
 
         subtopicos.forEach((subtopico) => {
-            // console.log(subtopico)
+
         })
-        // subtopico.addEventListener('click', () => {
-        //     console.log('Clicou em uma linha')
-        // })
+
     }
 
     static printSubTopicos(subtopicos) {
+
+        metodo.removeSubtopicos()
+
+        tbody = document.createElement('tbody');
+        tbody.classList.add('tbody-table-subtopicos')
 
         subtopicos.forEach((subtopico) => {
 
@@ -31,7 +36,6 @@ export class ModalController {
                 cor = 'claro'
             };
 
-            tbody = document.createElement('tbody');
             tr = document.createElement('tr');
             tr.setAttribute('draggable', true);
             tr.classList.add(cor)
@@ -78,12 +82,13 @@ export class ModalController {
         let modalPosts = document.querySelector('.modal-posts')
 
         posts.forEach((post) => {
-            // console.log(post)    
+
             let pTittle = document.createElement('p');
             let pComment = document.createElement('p');
             let linha = document.createElement('hr');
             let pulaLinha = document.createElement('br');
 
+            pTittle.classList.add('pPost', post._id)
             pTittle.textContent = post.tittle;
             pComment.textContent = post.comment;
             pComment.classList.add('coments');
@@ -95,16 +100,23 @@ export class ModalController {
 
         })
 
-        // console.log(subTopico.nextElementSibling)
         let nomeSubtopico = subTopico.textContent;
         let comment = subTopico.nextElementSibling.textContent;
         document.querySelector('.s-e-modal').children[0].textContent = nomeSubtopico;
         document.querySelector('.s-e-modal').children[1].textContent = comment;
 
-        console.log(seModal)
-        console.log(nomeSubtopico)
-        console.log(comment)
+    }
 
+    removeSubtopicos() {
+        let tbSubtopicos = document.querySelectorAll('.tbody-table-subtopicos')
+        
+        if(tbSubtopicos.length > 0) {
+
+            for(let i = tbSubtopicos.length -1; i >= 0; i--){
+                tbSubtopicos[i].remove()
+            }
+            
+        }
     }
 
     removePosts() {
@@ -119,12 +131,21 @@ export class ModalController {
 
     printTopicoModal(subtopico) {
 
+        let h2 = document.querySelector('.h2-subtopico');
+        let pSubtopico = document.querySelector('.p-subtopico');
+
+        if(h2 !== null) {
+            h2.remove()
+            pSubtopico.remove()
+        }
+
         let tittleSubtopico = document.createElement('h2');
-        tittleSubtopico.setAttribute('name', subtopico._id);
         tittleSubtopico.classList.add('h2-subtopico');
-        let commentSubtopico = document.createElement('p');
-    
+        tittleSubtopico.setAttribute('name', subtopico._id);
         tittleSubtopico.textContent = `${subtopico.order}. ${subtopico.nome}`;
+
+        let commentSubtopico = document.createElement('p');
+        commentSubtopico.classList.add('p-subtopico')
         commentSubtopico.textContent = subtopico.comment;
 
         seModal.appendChild(tittleSubtopico);
@@ -132,19 +153,104 @@ export class ModalController {
 
     }
 
-    static printPostsModal(subtopico, posts) {
-        let h2Subtopico = document.querySelector('.h2-subtopico')
-        // console.log(h2Subtopico)
-        posts.map((post) => {
-            // if(post.subtopico == subtopico)
-            // console.log(post)
-        })
-        // console.log(subtopico);
-        // console.log(posts);
+    // static printPostsModal(subtopico, posts) {
+    //     let h2Subtopico = document.querySelector('.h2-subtopico')
+    //     // console.log(h2Subtopico)
+    //     posts.map((post) => {
+    //         // if(post.subtopico == subtopico)
+    //         // console.log(post)
+    //     })
+    //     // console.log(subtopico);
+    //     // console.log(posts);
 
-    }
+    // }
+
+    editPosts() {
+        
+        const modalPosts = document.querySelector('.modal-posts');
+
+        modalPosts.addEventListener('click', (event) => {
+            
+            if(event.target.classList[0] == 'pPost') {
+
+                if(modalEditData.children.length > 0){
+                    for(let i = modalEditData.children.length -1 ; i>=0; i--) {
+                        modalEditData.children[i].remove()
+                    };
+                };
+               
+                const postSelected = event.target;
+                console.log(postSelected.classList[1])
+
+                const tittlePost = document.createElement('input');
+                tittlePost.classList.add('post', postSelected.classList[1]);
+                tittlePost.value = postSelected.textContent;
+                
+                const commentPost = document.createElement('input');
+                commentPost.classList.add('comment');
+                commentPost.value = postSelected.nextElementSibling.textContent.replace('// ', '');
+                
+                modalEditData.append(tittlePost);
+                modalEditData.append(commentPost);
+                modalEdit.style.zIndex = '10';
+            };
+
+        });
+
+    };
+
+    getPost() {
+        const btnSalvarPost = modalEdit.querySelector('.btn-modal-edit.salvar')
+        modalEdit.addEventListener('click', (event) => {
+            if(event.target.textContent == 'Salvar') {
+                console.log(event.target)
+                const post = event
+                .target
+                .parentNode
+                .parentNode
+                .children[0]
+                .children[0];
+                metodo.savePost(post);
+                // console.log(event
+                //     .target
+                //     .parentNode
+                //     .parentNode
+                //     .children[0]
+                //     .children[0]
+                //     .classList[1]
+                //     );
+
+            }
+        });
+    };
+
+    async savePost(post) {
+        const idPost = post.classList[1];
+        const tittlePost = post.value;
+        let commentPost;
+        if(post.nextElementSibling.value !== '') {
+            commentPost = `// ${post.nextElementSibling.value}`;  
+        }else{
+            commentPost = '';
+        };
+
+        const data = {
+            _id: idPost,
+            tittle: tittlePost,
+            comment: commentPost
+        };
+
+        console.log(data)
+      
+        const response = await Post.editPost(data);
+
+        console.log(response);
+
+    };
 
 };
 
 const metodo = new ModalController();
 metodo.alteraPosictionSubTopic();
+metodo.editPosts();
+metodo.getPost();

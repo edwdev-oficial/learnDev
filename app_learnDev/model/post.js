@@ -17,4 +17,16 @@ export class Post {
         // headers: { 'Content-Type': 'application/json; charset=UTF-8' }
     }
 
+    static async editPost(_data) {
+        
+        const promise = await fetch(`${Url}/post`,{
+            method: 'PUT',
+            body: JSON.stringify(_data),
+            headers: {'Content-Type': 'application/json; charset=UTF-8'}
+        });
+
+        return promise.json();
+
+    };
+
 };
