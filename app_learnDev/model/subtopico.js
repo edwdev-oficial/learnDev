@@ -37,4 +37,16 @@ export class Subtopico {
 
     }
 
+    static async excluiSubtopico (_data) {
+
+        const response = await fetch (`${url}/subtopico`, {
+            method: 'DELETE',
+            body: JSON.stringify(_data),
+            headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+        });
+
+        return response.json();
+
+    }
+
 };

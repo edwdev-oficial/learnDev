@@ -85,6 +85,10 @@ export class ModalController {
         posts.forEach((post) => {
 
             let pTittle = document.createElement('p');
+            let btnExcluiPost = document.createElement('button');
+            btnExcluiPost.classList.add('btn-exclui-post');
+            btnExcluiPost.textContent = 'Excluir';
+            btnExcluiPost.setAttribute('id', post._id);
             let pComment = document.createElement('p');
             let linha = document.createElement('hr');
             let pulaLinha = document.createElement('br');
@@ -96,6 +100,7 @@ export class ModalController {
 
             modalPosts.appendChild(pTittle);
             modalPosts.appendChild(pComment);
+            modalPosts.appendChild(btnExcluiPost);
             modalPosts.appendChild(linha);
             modalPosts.appendChild(pulaLinha);
 

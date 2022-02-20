@@ -12,14 +12,21 @@ export class ModalEditController {
     clickedModal() {
 
         modal.addEventListener('click', (event) => {
-
-            if(event.target.classList.value == 'h2-subtopico') {
-                console.log('Interpretou click no h2-subtopico?')
-                metodo.editSobtopic(event);
-            }
+            // console.log(event.target.classList[0])
+            if(event.target.classList.value == 'btn-inclui-subtopico')
+                metodo.createSubTopic();              
+            if(event.target.classList.value == 'h2-subtopico')
+                metodo.editSubtopic(event);
             if(event.target.classList.value == 'btn-exclui-subtopico')
-                console.log('Clicked in to btn-exclui-subtopico')
+                metodo.excluiSubtopico();                
+            if(event.target.classList.value == 'item-modal modal-posts')
+                metodo.createPost();
+            if(event.target.classList[0] == 'pPost')
+                metodo.editPosts();
+            if(event.target.classList.value == 'btn-exclui-post')
+                metodo.excluiPost(event.target);
 
+          
 
         });
 
@@ -33,80 +40,94 @@ export class ModalEditController {
                 metodo.saveCreateSubtopic(event);
             if(event.target.classList.value == 'btn-modal-edit salvar edit-subtopic') 
                 metodo.saveEditSubtopic(event);
+            if(event.target.classList.value == 'btn-modal-edit salvar create-post')
+                metodo.saveCreatePost();
+            if(event.target.classList.value == 'btn-modal-edit salvar edit-post')
+                metodo.getPost(event);                                
             if(event.target.classList.value == 'btn-modal-edit cancelar')
                 metodo.cancel(event);
-            if(event.target.classList.value == 'btn-modal-edit salvar edit-post')
-                metodo.getPost(event);
-
         });
 
     };
+
+    removeClassBtnSalvar() {
+        btnSalvar.classList.remove('create-subtopic', 'edit-subtopic', 'create-post', 'edit-post')
+    }
 
     createSubTopic(){
-        btnCreateSubtopic.addEventListener('click', () => {
-            btnSalvar.classList.remove();
+            console.log('entrou no metodo createSubtopic')
+            metodo.removeClassBtnSalvar();
             btnSalvar.classList.add('btn-modal-edit', 'salvar', 'create-subtopic');          
             metodo.criarCampos(['topico', 'nome', 'comment', 'codepen'])
-        });
     };
 
-    editSobtopic(event) {
-        btnSalvar.classList.remove();
+    editSubtopic(event) {
+        console.log('entrou no metodo editSubtopic')
+        metodo.removeClassBtnSalvar();
         btnSalvar.classList.add('btn-modal-edit', 'salvar', 'edit-subtopic');
         metodo.criarCampos(['id', 'nome', 'topico', 'comment', 'codepen'], event.target);
     }
     
-    excluiSubtopico() {
-        
+    async excluiSubtopico() {
+        const data = {
+            _id: document.querySelector('.h2-subtopico').getAttribute('id-subtopico')
+        };
+
+        const promise = await Subtopico.excluiSubtopico(data);
+
+        console.log(promise);
+
     }
 
     createPost() {
-        
-        document.addEventListener('keypress', (e) => {
-
-            if(e.key === 'Enter') {
-        
-                metodo.criarCampos(['tittle', 'topico', 'Subtopico', 'comment']);
-                
-            };
-
-        });
+        console.log('entrou no metodo createPost')
+        metodo.removeClassBtnSalvar();;
+        btnSalvar.classList.add('btn-modal-edit', 'salvar', 'create-post');        
+        metodo.criarCampos(['tittle', 'topico', 'subtopico', 'comment']);
 
     };
 
     editPosts() {
-        
+
+        console.log('entrou no metodo editPosts')
         const modalPosts = document.querySelector('.modal-posts');
 
-        modalPosts.addEventListener('click', (event) => {
-            btnSalvar.classList.remove();
-            btnSalvar.classList.add('btn-modal-edit', 'salvar', 'edit-post');
-            if(event.target.classList[0] == 'pPost') {
-
-                if(modalEditData.children.length > 0){
-                    for(let i = modalEditData.children.length -1 ; i>=0; i--) {
-                        modalEditData.children[i].remove()
-                    };
-                };
-               
-                const postSelected = event.target;
-
-                const tittlePost = document.createElement('input');
-                tittlePost.classList.add('post', postSelected.classList[1]);
-                tittlePost.value = postSelected.textContent;
-                
-                const commentPost = document.createElement('input');
-                commentPost.classList.add('comment');
-                commentPost.value = postSelected.nextElementSibling.textContent.replace('// ', '');
-                
-                modalEditData.append(tittlePost);
-                modalEditData.append(commentPost);
-                modalEdit.style.zIndex = '10';
+        metodo.removeClassBtnSalvar();;
+        btnSalvar.classList.add('btn-modal-edit', 'salvar', 'edit-post');
+        if(modalEditData.children.length > 0){
+            for(let i = modalEditData.children.length -1 ; i>=0; i--) {
+                modalEditData.children[i].remove()
             };
+        };
+       
+        const postSelected = event.target;
 
-        });
+        const tittlePost = document.createElement('input');
+        tittlePost.classList.add('post', postSelected.classList[1]);
+        tittlePost.value = postSelected.textContent;
+        
+        const commentPost = document.createElement('input');
+        commentPost.classList.add('comment');
+        commentPost.value = postSelected.nextElementSibling.textContent.replace('// ', '');
+        
+        modalEditData.append(tittlePost);
+        modalEditData.append(commentPost);
+        modalEdit.style.zIndex = '10';
 
     };
+
+    async excluiPost(target) {
+        
+        const data = {
+            _id: target.getAttribute('id')
+        };
+
+        const promise = await Post.excluiPost(data);
+
+        console.log(promise);
+
+
+    }
 
     getPost(event) {
 
@@ -174,10 +195,22 @@ export class ModalEditController {
 
     };    
 
-    criarCampos(campos, target) {
+    async saveCreatePost() {
+        
+        const data = {
+            tittle: document.querySelector('#tittle').value,
+            topico: document.querySelector('#topico').value,
+            subtopico: document.querySelector('#subtopico').value,
+            comment: `// ${document.querySelector('#comment').value}`
+        };
 
-        if(target)
-        console.log(target.nextElementSibling)
+        const promise = await Post.createPost(data);
+        
+        console.log(promise);
+
+    }
+
+    criarCampos(campos, target) {
 
         let topico = modal.getAttribute('id');
         
@@ -189,11 +222,12 @@ export class ModalEditController {
             const input = document.createElement('input');
             input.setAttribute('name', campo);
             input.setAttribute('id', campo);
-            if(campo == 'topico')
-                input.value = topico;
             if(campo == 'id')
                 input.value = target.getAttribute('id-subtopico');
-
+            if(campo == 'topico')
+                input.value = topico;
+            if(campo == 'subtopico')
+                input.value = document.querySelector('.h2-subtopico').getAttribute('id-subtopico')
             if(target) {
                 
                 if(campo == 'nome')
@@ -207,6 +241,7 @@ export class ModalEditController {
                 };
             
             }
+
 
 
             modalEditData.append(label);
@@ -232,8 +267,8 @@ export class ModalEditController {
 };
 
 const metodo = new ModalEditController();
-metodo.createSubTopic();
+// metodo.createSubTopic();
 metodo.clickedModal();
 metodo.clickedModalEdit();
-metodo.editPosts();
-metodo.createPost();
+// metodo.editPosts();
+// metodo.createPost();
