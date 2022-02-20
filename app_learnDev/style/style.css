@@ -283,3 +283,8 @@ tr {
   margin-right: 6px;
   margin-left: 10px;
 }
+
+.btn-inclui-subtopico,
+.btn-exclui-subtopico {
+  width: 11.79px;
+}

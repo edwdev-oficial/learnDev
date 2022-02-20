@@ -23,11 +23,10 @@ export class SubtopicoController {
         metodo.removeSubtopicos();
 
         subtopico.map((element) => {
-            // console.log(element)
+
             const subtopico = document.createElement('div');
             subtopico.classList.add('subtopico');
             subtopico.setAttribute('id', element._id);
-            // console.log(subtopico)
             const itemSe = document.createElement('div');
             itemSe.classList.add('item', 's-e');
             const itemSd = document.createElement('div');
@@ -48,10 +47,10 @@ export class SubtopicoController {
             subtopicos.appendChild(subtopico);
 
             subTopicoNome.addEventListener('click', (event) => {
-                metodo.abrirModal(event.target)
+                metodo.abrirModal(event.target, element)
             });
-
-            PostController.getPosts(element._id, element.codepen);
+            if (element.codepen)
+                PostController.getPosts(element._id, element.codepen);
 
             
         });

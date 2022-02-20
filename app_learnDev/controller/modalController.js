@@ -19,7 +19,7 @@ export class ModalController {
 
         })
 
-    }
+    };
 
     static printSubTopicos(subtopicos) {
 
@@ -43,6 +43,8 @@ export class ModalController {
             tdSubtopico = document.createElement('td');
             tdSubtopico.textContent = `${subtopico.order}. ${subtopico.nome}`;
             tdSubtopico.classList.add('td-subtopico');
+            if(subtopico.codepen)
+                tdSubtopico.setAttribute('hash-codepen', subtopico.codepen);
             tdSubtopico.setAttribute('nome', subtopico._id);
             tr.appendChild(tdSubtopico);
 
@@ -72,7 +74,7 @@ export class ModalController {
         const subTopico = this
         metodo.printPosts(posts.post, subTopico);
 
-    }
+    };
 
     printPosts(posts, subTopico){
 
@@ -100,11 +102,17 @@ export class ModalController {
         })
 
         let nomeSubtopico = subTopico.textContent;
+        
         let comment = subTopico.nextElementSibling.textContent;
-        document.querySelector('.s-e-modal').children[0].textContent = nomeSubtopico;
+        let h2TittleSubtopico = document.querySelector('.s-e-modal').children[0];
+        
+        h2TittleSubtopico.textContent = nomeSubtopico;
+        h2TittleSubtopico.setAttribute('id-subtopico', subTopico.getAttribute('nome'));
+        h2TittleSubtopico.setAttribute('hash-codepen', subTopico.getAttribute('hash-codepen'));
+        
         document.querySelector('.s-e-modal').children[1].textContent = comment;
 
-    }
+    };
 
     removeSubtopicos() {
         let tbSubtopicos = document.querySelectorAll('.tbody-table-subtopicos')
@@ -116,7 +124,7 @@ export class ModalController {
             }
             
         }
-    }
+    };
 
     removePosts() {
         let posts = document.querySelectorAll('.modal-posts')
@@ -126,7 +134,7 @@ export class ModalController {
             posts[0].childNodes[i].remove();
         }
         
-    }
+    };
 
     printTopicoModal(subtopico) {
 
@@ -150,7 +158,7 @@ export class ModalController {
         seModal.appendChild(tittleSubtopico);
         seModal.appendChild(commentSubtopico);
 
-    }
+    };
 
     // editPosts() {
         
