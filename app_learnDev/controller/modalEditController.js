@@ -12,7 +12,7 @@ export class ModalEditController {
     clickedModal() {
 
         modal.addEventListener('click', (event) => {
-            // console.log(event.target.classList[0])
+
             if(event.target.classList.value == 'btn-inclui-subtopico')
                 metodo.createSubTopic();              
             if(event.target.classList.value == 'h2-subtopico')
@@ -25,8 +25,6 @@ export class ModalEditController {
                 metodo.editPosts();
             if(event.target.classList.value == 'btn-exclui-post')
                 metodo.excluiPost(event.target);
-
-          
 
         });
 
@@ -55,14 +53,12 @@ export class ModalEditController {
     }
 
     createSubTopic(){
-            console.log('entrou no metodo createSubtopic')
             metodo.removeClassBtnSalvar();
             btnSalvar.classList.add('btn-modal-edit', 'salvar', 'create-subtopic');          
             metodo.criarCampos(['topico', 'nome', 'comment', 'codepen'])
     };
 
     editSubtopic(event) {
-        console.log('entrou no metodo editSubtopic')
         metodo.removeClassBtnSalvar();
         btnSalvar.classList.add('btn-modal-edit', 'salvar', 'edit-subtopic');
         metodo.criarCampos(['id', 'nome', 'topico', 'comment', 'codepen'], event.target);
@@ -75,21 +71,16 @@ export class ModalEditController {
 
         const promise = await Subtopico.excluiSubtopico(data);
 
-        console.log(promise);
-
     }
 
     createPost() {
-        console.log('entrou no metodo createPost')
         metodo.removeClassBtnSalvar();;
         btnSalvar.classList.add('btn-modal-edit', 'salvar', 'create-post');        
         metodo.criarCampos(['tittle', 'topico', 'subtopico', 'comment']);
-
     };
 
     editPosts() {
 
-        console.log('entrou no metodo editPosts')
         const modalPosts = document.querySelector('.modal-posts');
 
         metodo.removeClassBtnSalvar();;
@@ -124,9 +115,6 @@ export class ModalEditController {
 
         const promise = await Post.excluiPost(data);
 
-        console.log(promise);
-
-
     }
 
     getPost(event) {
@@ -152,7 +140,7 @@ export class ModalEditController {
 
         const response = await Subtopico.createSubtopico(data);
         metodo.cancel();
-        console.log(response)
+    
     };
     
     async saveEditSubtopic(event) {
@@ -167,7 +155,6 @@ export class ModalEditController {
 
         const promise = await Subtopico.editSubtopic(data);
 
-        console.log(promise);
         metodo.cancel();
 
     };
@@ -191,7 +178,6 @@ export class ModalEditController {
       
         const response = await Post.editPost(data);
 
-        console.log(response);
 
     };    
 
@@ -206,8 +192,6 @@ export class ModalEditController {
 
         const promise = await Post.createPost(data);
         
-        console.log(promise);
-
     }
 
     criarCampos(campos, target) {

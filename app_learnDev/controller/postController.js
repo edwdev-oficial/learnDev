@@ -41,11 +41,8 @@ export class PostController {
             
         });
         
-        // console.log(subtopicos)
         if (slughash != undefined)
         metodo.printCodePen(bt, slughash);
-        // console.log(subtopicos[0])
-        // ModalController.printPostsModal(subtopico, posts);
         
     }
 
