@@ -44,8 +44,13 @@ router.put('/', async(req, res) => {
 
     try {
 
-        let post;
+        console.log('Entrou na rota put do post')
 
+        let post;
+        let myQuery;
+
+        //se estiver alterando a order
+        if(req.body.newOrder) {
         //se subir
         if(req.body.order > req.body.newOrder) {
 
@@ -92,15 +97,25 @@ router.put('/', async(req, res) => {
                 },
             )
 
+        }
+
+        myQuery = await {
+            tittle: req.body.tittle,
+            comment: req.body.comment,
+            order: req.body.newOrder
         };
+        // console.log(myQuery)
+
+        }else{
+            myQuery = await {
+                tittle: req.body.tittle,
+                comment: req.body.comment
+            };
+        }
 
         post = await Post.findByIdAndUpdate(
             req.body._id,
-            {
-                tittle: req.body.tittle,
-                comment: req.body.comment,
-                order: req.body.newOrder
-            },
+            myQuery, 
             (option = {
                 returDocument: "after",
                 returnOriginal: false
@@ -109,8 +124,10 @@ router.put('/', async(req, res) => {
         );
 
         return res.status(200).send({ post });
+        // return res.send({})
 
     }catch(error) {
+        console.log(error)
         return res.status(400).send({ error: '' });
     }
 
@@ -134,8 +151,8 @@ router.delete('/', async(req, res) => {
 //find
 router.post('/find', async(req, res) => {
     try {
-        console.log('Entrou na rota post/find')
-        console.log(req.body)
+        // console.log('Entrou na rota post/find')
+        // console.log(req.body)
 
         const post = await Post.find(
             {

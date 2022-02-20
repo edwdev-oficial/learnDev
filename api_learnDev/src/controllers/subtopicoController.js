@@ -7,7 +7,7 @@ router.post('/', async(req, res) => {
 
     try {
 
-        // req.body.order = await Subtopico.count({ topico: req.body.topico }) + 1;
+        req.body.order = await Subtopico.count({ topico: req.body.topico }) + 1;
 
         const subtopico = await Subtopico.create(req.body);
 
@@ -43,6 +43,10 @@ router.put('/', async(req, res) => {
     try {
 
         let subtopico;
+        let myQuery;
+
+        //se estiver alterando a ordem
+        if(req.body.newOrder) {
 
         // se subindo
         if (req.body.newOrder < req.body.order) {
@@ -92,14 +96,24 @@ router.put('/', async(req, res) => {
 
         };
 
+        myQuery = {
+            nome: req.body.nome,
+            order: req.body.newOrder,
+            comment: req.body.comment,
+            codepen: req.body.codepen            
+        }
+
+        }else {
+            myQuery = {
+                nome: req.body.nome,
+                comment: req.body.comment,
+                codepen: req.body.codepen                
+            }
+        }
+
         subtopico = await Subtopico.findByIdAndUpdate(
             req.body._id,
-            {
-                nome: req.body.nome,
-                order: req.body.newOrder,
-                comment: req.body.comment,
-                codepen: req.body.codepen
-            },
+            myQuery,
             (options = {
                 returnDocument: "after",
                 returnOriginal: false
@@ -184,7 +198,6 @@ router.delete('/', async(req, res) => {
     };
 
 });
-
 
 // find by topico
 router.post('/find', async(req, res) => {
