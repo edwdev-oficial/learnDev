@@ -186,7 +186,7 @@ router.put('/arrumar', async(req, res) => {
 router.delete('/', async(req, res) => {
 
     try {
-
+        console.log(req.body)
         const subtopico = await Subtopico.findByIdAndDelete(
             req.body._id
         );

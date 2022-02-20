@@ -51,6 +51,7 @@ router.put('/', async(req, res) => {
 
         //se estiver alterando a order
         if(req.body.newOrder) {
+
         //se subir
         if(req.body.order > req.body.newOrder) {
 
@@ -101,6 +102,8 @@ router.put('/', async(req, res) => {
 
         myQuery = await {
             tittle: req.body.tittle,
+            topico: req.body.topico,
+            subtopico: req.body.subtopico,
             comment: req.body.comment,
             order: req.body.newOrder
         };
@@ -109,6 +112,8 @@ router.put('/', async(req, res) => {
         }else{
             myQuery = await {
                 tittle: req.body.tittle,
+                topico: req.body.topico,
+                subtopico: req.body.subtopico,
                 comment: req.body.comment
             };
         }
