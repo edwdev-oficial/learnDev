@@ -6,7 +6,7 @@ const router = express.Router();
 router.post('/', async(req, res) => {
 
     try {
-        console.log('VEIO AQUI')
+
         const tema = await Tema.create(req.body);
 
         return res.send(tema);

@@ -44,8 +44,6 @@ router.put('/', async(req, res) => {
 
     try {
 
-        console.log('Entrou na rota put do post')
-
         let post;
         let myQuery;
 
@@ -107,7 +105,6 @@ router.put('/', async(req, res) => {
             comment: req.body.comment,
             order: req.body.newOrder
         };
-        // console.log(myQuery)
 
         }else{
             myQuery = await {
@@ -132,7 +129,7 @@ router.put('/', async(req, res) => {
         // return res.send({})
 
     }catch(error) {
-        console.log(error)
+        
         return res.status(400).send({ error: '' });
     }
 
@@ -156,8 +153,6 @@ router.delete('/', async(req, res) => {
 //find
 router.post('/find', async(req, res) => {
     try {
-        // console.log('Entrou na rota post/find')
-        // console.log(req.body)
 
         const post = await Post.find(
             {

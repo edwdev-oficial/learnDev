@@ -124,7 +124,7 @@ router.put('/', async(req, res) => {
         return res.status(200).send({ subtopico });
 
     }catch(error) {
-        console.log(error)
+
         return res.status(400).send({ error: 'Update Failed' });
     };
 
@@ -176,7 +176,7 @@ router.put('/arrumar', async(req, res) => {
         return res.status(200).send({ subtopico });
 
     }catch(error) {
-        console.log(error)
+
         return res.status(400).send({ error: 'Update Failed' });
     };
 
@@ -186,7 +186,7 @@ router.put('/arrumar', async(req, res) => {
 router.delete('/', async(req, res) => {
 
     try {
-        console.log(req.body)
+
         const subtopico = await Subtopico.findByIdAndDelete(
             req.body._id
         );
