@@ -195,7 +195,6 @@ export class ModalEditController {
     }
 
     criarCampos(campos, target) {
-
         let topico = modal.getAttribute('id');
         
         campos.forEach((campo) => {
@@ -206,10 +205,18 @@ export class ModalEditController {
             const input = document.createElement('input');
             input.setAttribute('name', campo);
             input.setAttribute('id', campo);
-            if(campo == 'id')
+            if(campo == 'id') {
+
+                console.log(target)
                 input.value = target.getAttribute('id-subtopico');
-            if(campo == 'topico')
+            
+            }
+            if(campo == 'topico') {
+                
+                console.log(topico);
                 input.value = topico;
+
+            }
             if(campo == 'subtopico')
                 input.value = document.querySelector('.h2-subtopico').getAttribute('id-subtopico')
             if(target) {
