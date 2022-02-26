@@ -1,5 +1,4 @@
 import { Topico } from "../model/topico.js";
-// import { Subtopico } from "../model/subtopico.js";
 import { SubtopicoController } from "./subtopicoController.js";
 
 export class TopicoController {
@@ -50,6 +49,8 @@ export class TopicoController {
             indice ++;
 
             liTopico.addEventListener('click', () => {
+                let modal = document.querySelector('.container-modal');
+                modal.setAttribute('id', element._id);
                 const header = document.querySelector('h1')
                 header.textContent = 'LearnDev' + ' - ' + liTema.textContent + ' - ' + liTopico.textContent
                 SubtopicoController.getSubTopicos(element._id);
