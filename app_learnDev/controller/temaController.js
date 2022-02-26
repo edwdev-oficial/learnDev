@@ -40,8 +40,9 @@ export class TemaController {
 
             liTema.addEventListener('click', () => {
 
-                const header = document.querySelector('h1')
-                header.textContent = `LearnDev - ${ulTema.childNodes[0].textContent}`
+                const header = document.querySelector('h1');
+                header.textContent = `LearnDev - ${ulTema.childNodes[0].textContent}`;
+                header.setAttribute('class', element._id);
 
                 if (ulTema.childNodes.length == 1) {
                     TopicoController.getTopicos(element._id);
