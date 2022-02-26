@@ -63,7 +63,7 @@ export class SubtopicoController {
     abrirModal(target) {
         let idTopico = target.classList[0].replace('topico-', '');
         let modal = document.querySelector('.container-modal');
-        modal.setAttribute('id', idTopico);
+        // modal.setAttribute('id', idTopico);
         modal.style.zIndex = '2'
 
     }
