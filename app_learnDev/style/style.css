@@ -36,10 +36,34 @@ header {
 
 .altera-menu {
   position: fixed;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  align-items: center;
   min-width: 17vw;
   height: 10vh;
-  background-color: tomato;
+  background-color: var(--cor2);
   z-index: 10;
+}
+
+.altera-menu-mais,
+.altera-menu-menos {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  color: white;
+  cursor: pointer;
+  background-color: #464D45;
+  border-radius: 50%;
+}
+
+.font {
+  width: 60px;
+  height: 60px;
+  background: white;
 }
 
 .menu {
