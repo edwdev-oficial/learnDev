@@ -7,8 +7,8 @@ router.post('/', async(req, res) => {
 
     try {
 
-        const tema = await Tema.create(req.body);
-
+        let tema = await Tema.create(req.body);
+        tema = await Tema.find({});
         return res.send(tema);
 
     }catch(error) {
@@ -58,11 +58,13 @@ router.delete('/', async(req, res) => {
 
     try {
 
-        const tema = await Tema.findByIdAndDelete(
+        let tema = await Tema.findByIdAndDelete(
             req.body._id
-        )
+        );
 
-        return res.status(200).send({ msg: 'delete ok!!!' })
+        tema = await Tema.find({});
+
+        return res.status(200).send(tema);
 
     }catch(error) {
         return res.status(400).send({ error: 'Delete failed' })
